@@ -1,10 +1,5 @@
 package nl.han.ica.icss.parser;
 
-import java.util.Objects;
-import java.util.Stack;
-
-import javax.swing.text.html.StyleSheet;
-
 import nl.han.ica.datastructures.implementations.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
@@ -46,7 +41,6 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	//Variables
-
 	@Override
 	public void enterVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
 		currentContainer.push(new VariableAssignment());
@@ -54,8 +48,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -65,12 +58,10 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitVariableReference(ICSSParser.VariableReferenceContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	//Stylerule
-
 	@Override
 	public void enterStyleRule(ICSSParser.StyleRuleContext ctx) {
 		currentContainer.push(new Stylerule());
@@ -78,12 +69,10 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	//Selectors
-
 	@Override
 	public void enterTagSelector(ICSSParser.TagSelectorContext ctx) {
 		currentContainer.push(new TagSelector(ctx.getText()));
@@ -91,8 +80,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitTagSelector(ICSSParser.TagSelectorContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -102,8 +90,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitClassSelector(ICSSParser.ClassSelectorContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -113,12 +100,10 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitIdSelector(ICSSParser.IdSelectorContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	//Property Name
-
 	@Override
 	public void enterPropertyName(ICSSParser.PropertyNameContext ctx) {
 		currentContainer.push(new PropertyName(ctx.getText()));
@@ -126,8 +111,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitPropertyName(ICSSParser.PropertyNameContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 
@@ -139,12 +123,10 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitDeclaration(ICSSParser.DeclarationContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	//Expression
-
 	@Override
 	public void enterExpression(ICSSParser.ExpressionContext ctx) {
 		if (ctx.getChildCount() == 3){
@@ -160,8 +142,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	public void exitExpression(ICSSParser.ExpressionContext ctx) {
 		if (ctx.MUL() != null | ctx.PLUS() != null | ctx.MIN() != null) {
-			ASTNode operation = currentContainer.pop();
-			currentContainer.peek().addChild(operation);
+			currentContainer.peek().addChild(currentContainer.pop());
 		}
 	}
 
@@ -173,8 +154,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitColorliteral(ICSSParser.ColorliteralContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -184,8 +164,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitPixelliteral(ICSSParser.PixelliteralContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -195,8 +174,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	@Override
@@ -206,11 +184,38 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override
 	public void exitScalarLiteral(ICSSParser.ScalarLiteralContext ctx) {
-		ASTNode node = currentContainer.pop();
-		currentContainer.peek().addChild(node);
+		currentContainer.peek().addChild(currentContainer.pop());
+	}
+
+	@Override
+	public void enterPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) {
+		currentContainer.push(new PercentageLiteral(ctx.getText()));
+	}
+
+	@Override
+	public void exitPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) {
+		currentContainer.peek().addChild(currentContainer.pop());
 	}
 
 	//If Else
+	@Override
+	public void enterIfClause(ICSSParser.IfClauseContext ctx) {
+		currentContainer.push(new IfClause());
+	}
 
+	@Override
+	public void exitIfClause(ICSSParser.IfClauseContext ctx) {
+		currentContainer.peek().addChild(currentContainer.pop());
+	}
+
+	@Override
+	public void enterElseClause(ICSSParser.ElseClauseContext ctx) {
+		currentContainer.push(new ElseClause());
+	}
+
+	@Override
+	public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
+		currentContainer.peek().addChild(currentContainer.pop());
+	}
 }
 
