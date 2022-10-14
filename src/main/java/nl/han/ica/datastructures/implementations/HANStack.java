@@ -5,7 +5,7 @@ import nl.han.ica.datastructures.IHANStack;
 
 public class HANStack<T> implements IHANStack<T>
 {
-	private final IHANLinkedList<T> stack = new HANLinkedList<>();
+	private IHANLinkedList<T> stack = new HANLinkedList<>();
 
 	@Override
 	public void push(T value){

@@ -60,6 +60,7 @@ class ParserTest {
 		AST exp = Fixtures.uncheckedLevel0();
 		assertEquals(exp,sut);
 	}
+
 	@Test
 	void testParseLevel1() throws IOException {
 

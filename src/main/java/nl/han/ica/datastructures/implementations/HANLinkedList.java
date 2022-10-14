@@ -30,12 +30,10 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
     public void addFirst(T value) {
         HANNode<T> temp = new HANNode<T>(value);
 
-        if (this.head == null)
-        {
+        if (this.head == null) {
             this.head = temp;
             return;
         }
-
         HANNode<T> current = this.head;
 
         while (current.next != null) current = current.next;
@@ -44,8 +42,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
     }
 
     @Override
-    public void clear()
-    {
+    public void clear() {
         this.head = null;
     }
 
@@ -68,8 +65,9 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
         while (index-- > 1 && current != null) current = current.next;
 
-        if (current == null || current.next == null)
+        if (current == null || current.next == null) {
             return;
+        }
 
         temp.next = current.next;
         current.next = temp;
@@ -84,17 +82,17 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
             return;
         }
 
-        HANNode<T> currnet = this.head;
+        HANNode<T> current = this.head;
 
-        while (index-- > 1 && currnet != null) {
-            currnet = currnet.next;
+        while (index-- > 1 && current != null) {
+            current = current.next;
         }
 
-        if (currnet == null || currnet.next == null) {
+        if (current == null || current.next == null) {
             return;
         }
 
-        currnet.next = currnet.next.next;
+        current.next = current.next.next;
     }
 
     @Override
@@ -132,7 +130,9 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public String toString() {
-        return "HANLinkedList [head=" + head + "]";
+        return "HANLinkedList{" +
+                "head=" + head +
+                '}';
     }
 }
 
