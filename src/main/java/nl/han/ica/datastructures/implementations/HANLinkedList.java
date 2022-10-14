@@ -2,15 +2,12 @@ package nl.han.ica.datastructures.implementations;
 
 import nl.han.ica.datastructures.IHANLinkedList;
 
-public class HANLinkedList<T> implements IHANLinkedList<T>
-{
-    private class HANNode<N>
-    {
+public class HANLinkedList<T> implements IHANLinkedList<T> {
+    private class HANNode<N> {
         public N value;
         public HANNode<N> next;
 
-        public HANNode(N value)
-        {
+        public HANNode(N value) {
             this.value = value;
             this.next = null;
         }
@@ -30,8 +27,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
     }
 
     @Override
-    public void addFirst(T value)
-    {
+    public void addFirst(T value) {
         HANNode<T> temp = new HANNode<T>(value);
 
         if (this.head == null)
@@ -40,11 +36,11 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
             return;
         }
 
-        HANNode<T> curr = this.head;
+        HANNode<T> current = this.head;
 
-        while (curr.next != null) curr = curr.next;
+        while (current.next != null) current = current.next;
 
-        curr.next = temp;
+        current.next = temp;
     }
 
     @Override
@@ -54,18 +50,15 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
     }
 
     @Override
-    public void insert(int index, T value)
-    {
+    public void insert(int index, T value) {
         HANNode<T> temp = new HANNode<T>(value);
 
-        if (this.head == null)
-        {
+        if (this.head == null) {
             this.head = temp;
             return;
         }
 
-        if (index == 0)
-        {
+        if (index == 0) {
             temp.next = this.head;
             this.head = temp;
             return;
@@ -83,8 +76,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
     }
 
     @Override
-    public void delete(int index)
-    {
+    public void delete(int index) {
         if (index == 0 && this.head != null){
             HANNode<T> temp = this.head;
             this.head = temp.next;
@@ -115,26 +107,23 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
     }
 
     @Override
-    public void removeFirst()
-    {
+    public void removeFirst() {
         this.delete(0);
     }
 
     @Override
-    public T getFirst()
-    {
+    public T getFirst() {
         return this.get(0);
     }
 
     @Override
-    public int getSize()
-    {
+    public int getSize() {
         int size = 0;
-        HANNode<T> curr = this.head;
+        HANNode<T> current = this.head;
 
-        while (curr != null)
+        while (current != null)
         {
-            curr = curr.next;
+            current = current.next;
             ++size;
         }
 
@@ -142,8 +131,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T>
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "HANLinkedList [head=" + head + "]";
     }
 }

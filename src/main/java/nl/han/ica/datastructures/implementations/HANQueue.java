@@ -4,7 +4,7 @@ import nl.han.ica.datastructures.IHANQueue;
 import nl.han.ica.datastructures.IHANLinkedList;
 
 public class HANQueue<T> implements IHANQueue<T> {
-    private IHANLinkedList<T> queue = new HANLinkedList<>();
+    private final IHANLinkedList<T> queue = new HANLinkedList<>();
 
     @Override
     public void clear() {

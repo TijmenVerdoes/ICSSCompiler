@@ -11,8 +11,8 @@ import nl.han.ica.icss.ast.ASTNode;
 
 public class ASTPane extends BorderPane {
 
-	private TreeView<ASTNode> content;
-	private Label title;
+	private final TreeView<ASTNode> content;
+	private final Label title;
 
 	public ASTPane () {
 		super();

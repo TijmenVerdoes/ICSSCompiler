@@ -42,25 +42,42 @@ MUL: '*';
 ASSIGNMENT_OPERATOR: ':=';
 
 //--- PARSER: ---
-stylesheet: (variableAssignment | styleRule)* EOF;
+//Stylesheet
+stylesheet: (variableAssignment| styleRule)* EOF;
 
-styleRule: (tagSelector | classSelector | idSelector) OPEN_BRACE (declaration)* CLOSE_BRACE;
-
+//Variables
 variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
-
-expression: literal | expression MUL expression | expression PLUS expression | expression MIN expression;
-
-declaration: propertyName COLON literal SEMICOLON;
-
 variableReference: CAPITAL_IDENT;
-propertyName: LOWER_IDENT;
 
-literal: (pixelliteral | colorliteral | boolLiteral | variableReference);
+//Stylerule
+styleRule: selector OPEN_BRACE (declaration | ifClause | variableAssignment)* CLOSE_BRACE;
 
-colorliteral: COLOR;
-pixelliteral: PIXELSIZE;
+//Selectors
+selector: (tagSelector | classSelector | idSelector);
 tagSelector: LOWER_IDENT;
 classSelector: CLASS_IDENT;
 idSelector: ID_IDENT;
+
+//Property Name
+propertyName: LOWER_IDENT;
+
+//Declaration
+declaration: propertyName COLON expression SEMICOLON;
+
+//Expression
+expression: literal | expression MUL expression | expression PLUS expression | expression MIN expression;
+
+//Literals
+literal: (pixelliteral | colorliteral | boolLiteral | scalarLiteral | percentageLiteral | variableReference);
+colorliteral: COLOR;
+pixelliteral: PIXELSIZE;
 boolLiteral: TRUE | FALSE;
+scalarLiteral: SCALAR;
+percentageLiteral: PERCENTAGE;
+
+//If Else
+ifClause: IF BOX_BRACKET_OPEN (variableReference) BOX_BRACKET_CLOSE OPEN_BRACE
+            (declaration | ifClause)*
+            CLOSE_BRACE elseClause*;
+elseClause: ELSE OPEN_BRACE (declaration | ifClause)* CLOSE_BRACE;
 

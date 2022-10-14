@@ -12,8 +12,8 @@ import javafx.scene.layout.BorderPane;
 @SuppressWarnings("restriction")
 public class OutputPane extends BorderPane {
 
-	private Label title;
-	private TextArea content;
+	private final Label title;
+	private final TextArea content;
 
 	public OutputPane () {
 		super();

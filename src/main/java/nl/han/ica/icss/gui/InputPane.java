@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 
 @SuppressWarnings("restriction")
 public class InputPane extends BorderPane {
-	private TextArea content;
-	private Label title;
+	private final TextArea content;
+	private final Label title;
 	
 	public InputPane() {
 		super();
