@@ -25,6 +25,10 @@ public class VariableReference extends Expression {
 		return Objects.equals(name, that.name);
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public int hashCode() {
 

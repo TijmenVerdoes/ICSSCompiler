@@ -1,9 +1,11 @@
-LinkColor := #ff0000;
 ParWidth := 500px;
 AdjustColor := TRUE;
 UseLinkColor := FALSE;
+Nested := ParWidth;
+
 
 p {
+    LinkColor := #ff0000;
 	background-color: #ffffff;
 	width: ParWidth;
 	if[AdjustColor] {
@@ -16,6 +18,7 @@ p {
 	}
 	height: 20px;
 }
+
 a {
 	color: LinkColor;
 }
@@ -27,5 +30,4 @@ a {
 .menu {
 	color: #000000;
     background-color: LinkColor;
-
 }

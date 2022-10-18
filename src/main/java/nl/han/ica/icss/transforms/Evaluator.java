@@ -1,6 +1,7 @@
 package nl.han.ica.icss.transforms;
 
 import nl.han.ica.datastructures.IHANLinkedList;
+import nl.han.ica.datastructures.implementations.HANLinkedList;
 import nl.han.ica.icss.ast.*;
 import nl.han.ica.icss.ast.literals.PercentageLiteral;
 import nl.han.ica.icss.ast.literals.PixelLiteral;
@@ -17,7 +18,7 @@ public class Evaluator implements Transform {
 	private IHANLinkedList<HashMap<String, Literal>> variableValues;
 
 	public Evaluator() {
-		//variableValues = new HANLinkedList<>();
+		variableValues = new HANLinkedList<>();
 	}
 
 	@Override
