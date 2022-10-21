@@ -2,10 +2,10 @@ ParWidth := 500px;
 AdjustColor := TRUE;
 UseLinkColor := FALSE;
 Nested := ParWidth;
-
+LinkColor := #ff0000;
 
 p {
-    LinkColor := #ff0000;
+    Kaas := #ffffff;
 	background-color: #ffffff;
 	width: ParWidth;
 	if[AdjustColor] {
@@ -21,6 +21,7 @@ p {
 
 a {
 	color: LinkColor;
+
 }
 
 #menu {
